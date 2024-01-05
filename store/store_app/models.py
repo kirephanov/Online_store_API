@@ -4,7 +4,7 @@ class Product(models.Model):
     product_title = models.CharField(max_length=200, blank=True, default='')
     product_price = models.IntegerField()
     product_discount = models.IntegerField(default=0, blank=True)
-    product_total_cost = models.IntegerField()
+    product_total_cost = models.IntegerField(blank=True)
     product_photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     product_description = models.TextField(max_length=500)
     product_specifications = models.TextField(max_length=500)
