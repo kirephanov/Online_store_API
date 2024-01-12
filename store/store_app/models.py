@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Product(models.Model):
     product_title = models.CharField(max_length=200, blank=True, default='')
@@ -35,3 +37,15 @@ class Seller(models.Model):
 
     class Meta:
         ordering = ['pk']
+
+
+class Basket(models.Model):
+    basket_user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['pk']
+
+class BasketItem(models.Model):
+    basket_item_basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
+    basket_item_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    basket_item_quantity = models.PositiveIntegerField(default=1)

@@ -40,6 +40,15 @@ class SellerSerializer(serializers.Serializer):
         return instance
 
 
+class BasketItemSerializer(serializers.HyperlinkedModelSerializer):
+    basket_item_basket = serializers.ReadOnlyField(source='basket_item_basket.basket_user.username')
+
+    class Meta:
+        model = BasketItem
+        fields = ['url', 'id', 'basket_item_basket', 'basket_item_product',
+                  'basket_item_quantity']
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     product = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', 
                                                   read_only=True)
