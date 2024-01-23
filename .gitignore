@@ -2,3 +2,5 @@ venv/
 **/__pycache__
 store/db.sqlite3
 store/store_app/migrations/
+product_photo.png
+store/media/
