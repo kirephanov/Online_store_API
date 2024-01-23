@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.filters import SearchFilter
 
 
 # Endpoint for API login.
@@ -29,7 +30,12 @@ class ProductList(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    # Product filtering
+    filter_backends = [SearchFilter]
+    search_fields = ['product_title', 'product_price', 'product_total_cost']
+
     def perform_create(self, serializer):
+        # Saving the product owner
         serializer.save(owner=self.request.user)
 
 
